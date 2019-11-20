@@ -9,11 +9,19 @@ public class UserRole {
     @GeneratedValue
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private RoleName role;
+    private String roles;
 
     @OneToOne(mappedBy="userRole")
     private User user;
+
+    public UserRole(Long id, String roles) {
+        this.id = id;
+        this.roles = roles;
+    }
+
+    public UserRole(){
+
+    }
 
     public Long getId() {
         return id;
@@ -23,12 +31,12 @@ public class UserRole {
         this.id = id;
     }
 
-    public RoleName getRole() {
-        return role;
+    public String getRoles() {
+        return roles;
     }
 
-    public void setRole(RoleName role) {
-        this.role = role;
+    public void setRoles(String role) {
+        this.roles = role;
     }
 
     public User getUser() {

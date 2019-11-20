@@ -1,6 +1,8 @@
 package com.vinyl.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -11,13 +13,21 @@ public class User {
     @GeneratedValue
     private Long id;
 
+    @NotNull
     private String firstName;
 
+    @NotNull
     private String lastName;
 
-    private String emailAddress;
+    @Email(message = "Not email address pattern")
+    @NotNull
+    private String username;
 
+    @NotNull
     private String password;
+
+    @Transient
+    private String passwordConfirm;
 
     @OneToOne(mappedBy="user")
     private Cart cart;
@@ -53,12 +63,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -67,6 +77,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
     public Cart getCart() {
